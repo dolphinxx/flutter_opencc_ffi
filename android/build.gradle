@@ -1,5 +1,5 @@
 group 'com.whaleread.flutter_opencc_ffi.flutter_opencc_ffi'
-version '1.0-SNAPSHOT'
+version '0.0.1'
 
 buildscript {
     ext.kotlin_version = '1.6.10'
@@ -18,6 +18,7 @@ rootProject.allprojects {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 }
 
@@ -47,4 +48,5 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.github.dolphinxx:opencc_android:1.1.4'
 }
