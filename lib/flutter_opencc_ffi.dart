@@ -55,11 +55,11 @@ class FlutterOpenccFfi {
     }
     Pointer<Utf8> configFilePtr = _getConfigFileFromType(type).toNativeUtf8();
     Pointer<Utf8> textPtr = text.toNativeUtf8();
-    Pointer<Char> resultPtr = bindings.convert(textPtr.cast(), configFilePtr.cast());
+    Pointer<Char> resultPtr = bindings.opencc_convert(textPtr.cast(), configFilePtr.cast());
     malloc.free(configFilePtr);
     malloc.free(textPtr);
     String result = resultPtr.cast<Utf8>().toDartString();
-    bindings.free_string(resultPtr);
+    bindings.opencc_free_string(resultPtr);
     return result;
   }
 
@@ -75,12 +75,12 @@ class FlutterOpenccFfi {
     for (Pointer<Utf8> textPtr in textPtrList) {
       textsPtr[i++] = textPtr;
     }
-    Pointer<Pointer<Char>> resultPtr = bindings.convertList(textsPtr.cast(), size, configFilePtr.cast());
+    Pointer<Pointer<Char>> resultPtr = bindings.opencc_convertList(textsPtr.cast(), size, configFilePtr.cast());
     malloc.free(configFilePtr);
     textPtrList.forEach(malloc.free);
     malloc.free(textsPtr);
     List<String> result = List.generate(size, (index) => resultPtr[i].cast<Utf8>().toDartString());
-    bindings.free_string_array(resultPtr, size);
+    bindings.opencc_free_string_array(resultPtr, size);
     return result;
   }
 }

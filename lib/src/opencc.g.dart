@@ -18,74 +18,74 @@ class Bindings {
           lookup)
       : _lookup = lookup;
 
-  ffi.Pointer<ffi.Char> convert(
+  ffi.Pointer<ffi.Char> opencc_convert(
     ffi.Pointer<ffi.Char> text,
     ffi.Pointer<ffi.Char> configFile,
   ) {
-    return _convert(
+    return _opencc_convert(
       text,
       configFile,
     );
   }
 
-  late final _convertPtr = _lookup<
+  late final _opencc_convertPtr = _lookup<
       ffi.NativeFunction<
           ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>>('convert');
-  late final _convert = _convertPtr.asFunction<
+              ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>>('opencc_convert');
+  late final _opencc_convert = _opencc_convertPtr.asFunction<
       ffi.Pointer<ffi.Char> Function(
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  ffi.Pointer<ffi.Pointer<ffi.Char>> convertList(
+  ffi.Pointer<ffi.Pointer<ffi.Char>> opencc_convertList(
     ffi.Pointer<ffi.Pointer<ffi.Char>> list,
     int size,
     ffi.Pointer<ffi.Char> configFile,
   ) {
-    return _convertList(
+    return _opencc_convertList(
       list,
       size,
       configFile,
     );
   }
 
-  late final _convertListPtr = _lookup<
+  late final _opencc_convertListPtr = _lookup<
       ffi.NativeFunction<
           ffi.Pointer<ffi.Pointer<ffi.Char>> Function(
               ffi.Pointer<ffi.Pointer<ffi.Char>>,
               ffi.Int,
-              ffi.Pointer<ffi.Char>)>>('convertList');
-  late final _convertList = _convertListPtr.asFunction<
+              ffi.Pointer<ffi.Char>)>>('opencc_convertList');
+  late final _opencc_convertList = _opencc_convertListPtr.asFunction<
       ffi.Pointer<ffi.Pointer<ffi.Char>> Function(
           ffi.Pointer<ffi.Pointer<ffi.Char>>, int, ffi.Pointer<ffi.Char>)>();
 
-  void free_string(
+  void opencc_free_string(
     ffi.Pointer<ffi.Char> str,
   ) {
-    return _free_string(
+    return _opencc_free_string(
       str,
     );
   }
 
-  late final _free_stringPtr =
+  late final _opencc_free_stringPtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Char>)>>(
-          'free_string');
-  late final _free_string =
-      _free_stringPtr.asFunction<void Function(ffi.Pointer<ffi.Char>)>();
+          'opencc_free_string');
+  late final _opencc_free_string =
+      _opencc_free_stringPtr.asFunction<void Function(ffi.Pointer<ffi.Char>)>();
 
-  void free_string_array(
+  void opencc_free_string_array(
     ffi.Pointer<ffi.Pointer<ffi.Char>> array,
     int size,
   ) {
-    return _free_string_array(
+    return _opencc_free_string_array(
       array,
       size,
     );
   }
 
-  late final _free_string_arrayPtr = _lookup<
+  late final _opencc_free_string_arrayPtr = _lookup<
       ffi.NativeFunction<
           ffi.Void Function(ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Int)>>('free_string_array');
-  late final _free_string_array = _free_string_arrayPtr
+              ffi.Int)>>('opencc_free_string_array');
+  late final _opencc_free_string_array = _opencc_free_string_arrayPtr
       .asFunction<void Function(ffi.Pointer<ffi.Pointer<ffi.Char>>, int)>();
 }
