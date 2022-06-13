@@ -79,7 +79,7 @@ class FlutterOpenccFfi {
     malloc.free(configFilePtr);
     textPtrList.forEach(malloc.free);
     malloc.free(textsPtr);
-    List<String> result = List.generate(size, (index) => resultPtr[i].cast<Utf8>().toDartString());
+    List<String> result = List.generate(size, (index) => resultPtr[index].cast<Utf8>().toDartString());
     bindings.opencc_free_string_array(resultPtr, size);
     return result;
   }
