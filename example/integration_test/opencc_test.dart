@@ -1,10 +1,10 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle, ByteData;
 import 'package:flutter_opencc_ffi/flutter_opencc_ffi.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:logging/logging.dart';
 import 'package:path_provider/path_provider.dart' show getApplicationSupportDirectory;
 
 Future<String> copyAssets() async {
@@ -32,19 +32,18 @@ Future<String> copyAssets() async {
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  Logger logger = Logger('test');
   testWidgets('convert s2tw', (widgetTester) async {
     String dataDir = await copyAssets();
     FlutterOpenccFfi opencc = FlutterOpenccFfi(dataDir);
     String actual = opencc.convert('着装污染虚伪发泄棱柱群众里面', 's2tw');
-    logger.info(actual);
+    debugPrint(actual);
     expect(actual, "著裝汙染虛偽發洩稜柱群眾裡面");
   });
   testWidgets('convert tw2s', (widgetTester) async {
     String dataDir = await copyAssets();
     FlutterOpenccFfi opencc = FlutterOpenccFfi(dataDir);
     String actual = opencc.convert('著裝汙染虛偽發洩稜柱群眾裡面', 'tw2s');
-    logger.info(actual);
+    debugPrint(actual);
     expect(actual, "着装污染虚伪发泄棱柱群众里面");
   });
   testWidgets('convertList s2tw', (widgetTester) async {
@@ -52,7 +51,7 @@ void main() {
     FlutterOpenccFfi opencc = FlutterOpenccFfi(dataDir);
     List<String> texts = ['着装污染虚伪发泄棱柱群众里面', '远看山有色', '近听水无声', '春去花还在', '人来鸟不惊'];
     List<String> actual = opencc.convertList(texts, 's2tw');
-    logger.info(actual.join('\n'));
+    debugPrint(actual.join('\n'));
     expect(actual, equals(["著裝汙染虛偽發洩稜柱群眾裡面", "遠看山有色", "近聽水無聲", "春去花還在", "人來鳥不驚"]));
   });
   testWidgets('convertList tw2s', (widgetTester) async {
@@ -60,7 +59,7 @@ void main() {
     FlutterOpenccFfi opencc = FlutterOpenccFfi(dataDir);
     List<String> texts = ["著裝汙染虛偽發洩稜柱群眾裡面", "遠看山有色", "近聽水無聲", "春去花還在", "人來鳥不驚"];
     List<String> actual = opencc.convertList(texts, 'tw2s');
-    logger.info(actual.join('\n'));
+    debugPrint(actual.join('\n'));
     expect(actual, equals(['着装污染虚伪发泄棱柱群众里面', '远看山有色', '近听水无声', '春去花还在', '人来鸟不惊']));
   });
 }
