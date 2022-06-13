@@ -75,7 +75,7 @@ class FlutterOpenccFfi {
     for (Pointer<Utf8> textPtr in textPtrList) {
       textsPtr[i++] = textPtr;
     }
-    Pointer<Pointer<Char>> resultPtr = bindings.opencc_convertList(textsPtr.cast(), size, configFilePtr.cast());
+    Pointer<Pointer<Char>> resultPtr = bindings.opencc_convert_list(textsPtr.cast(), size, configFilePtr.cast());
     malloc.free(configFilePtr);
     textPtrList.forEach(malloc.free);
     malloc.free(textsPtr);

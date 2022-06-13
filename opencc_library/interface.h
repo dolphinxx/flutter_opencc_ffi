@@ -1,7 +1,7 @@
 // for ffigen
 const char* opencc_convert(const char* text, const char* configFile);
 
-char** opencc_convertList(char** list, int size, const char* configFile);
+char** opencc_convert_list(char** list, int size, const char* configFile);
 
 void opencc_free_string(char *str);
 

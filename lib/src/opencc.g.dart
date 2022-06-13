@@ -36,25 +36,25 @@ class Bindings {
       ffi.Pointer<ffi.Char> Function(
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  ffi.Pointer<ffi.Pointer<ffi.Char>> opencc_convertList(
+  ffi.Pointer<ffi.Pointer<ffi.Char>> opencc_convert_list(
     ffi.Pointer<ffi.Pointer<ffi.Char>> list,
     int size,
     ffi.Pointer<ffi.Char> configFile,
   ) {
-    return _opencc_convertList(
+    return _opencc_convert_list(
       list,
       size,
       configFile,
     );
   }
 
-  late final _opencc_convertListPtr = _lookup<
+  late final _opencc_convert_listPtr = _lookup<
       ffi.NativeFunction<
           ffi.Pointer<ffi.Pointer<ffi.Char>> Function(
               ffi.Pointer<ffi.Pointer<ffi.Char>>,
               ffi.Int,
-              ffi.Pointer<ffi.Char>)>>('opencc_convertList');
-  late final _opencc_convertList = _opencc_convertListPtr.asFunction<
+              ffi.Pointer<ffi.Char>)>>('opencc_convert_list');
+  late final _opencc_convert_list = _opencc_convert_listPtr.asFunction<
       ffi.Pointer<ffi.Pointer<ffi.Char>> Function(
           ffi.Pointer<ffi.Pointer<ffi.Char>>, int, ffi.Pointer<ffi.Char>)>();
 
