@@ -7,7 +7,7 @@ void main() {
   test('instantiate with non existing data dir', () async {
     dynamic error;
     try {
-      FlutterOpenccFfi('');
+      FlutterOpenccFfi('s2tw', '');
     } catch (e) {
       error = e;
     }
@@ -17,7 +17,7 @@ void main() {
   test('instantiate success', () async {
     dynamic error;
     try {
-      FlutterOpenccFfi(Directory.current.path);
+      FlutterOpenccFfi('tw2s', Directory.current.path);
     } catch (e) {
       error = e;
     }
