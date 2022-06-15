@@ -8,14 +8,21 @@ import 'package:path/path.dart' as path;
 
 class FlutterOpenccFfi {
   final String dataDir;
+  final String type;
+  late final Pointer<Char> _typePtr;
   late final Bindings bindings;
 
+  /// [type]
   /// [dataDir] is the directory contains `.json` and `.ocd2` files.
-  FlutterOpenccFfi(this.dataDir) {
+  FlutterOpenccFfi(this.type, this.dataDir) {
     if (!Directory(dataDir).existsSync()) {
       throw AssertionError('dataDir[$dataDir] not exists');
     }
     bindings = Bindings(_getDynamicLibrary());
+    _typePtr = type.toNativeUtf8().cast();
+    Pointer<Utf8> configFilePtr = _getConfigFileFromType(type).toNativeUtf8();
+    bindings.opencc_init_converter(_typePtr, configFilePtr.cast());
+    malloc.free(configFilePtr);
   }
 
   DynamicLibrary _getDynamicLibrary() {
@@ -49,38 +56,38 @@ class FlutterOpenccFfi {
 
   String _getConfigFileFromType(String type) => path.join(dataDir, '$type.json');
 
-  String convert(String text, String type) {
+  String convert(String text) {
     if (text.isEmpty) {
       return text;
     }
-    Pointer<Utf8> configFilePtr = _getConfigFileFromType(type).toNativeUtf8();
     Pointer<Utf8> textPtr = text.toNativeUtf8();
-    Pointer<Char> resultPtr = bindings.opencc_convert(textPtr.cast(), configFilePtr.cast());
-    malloc.free(configFilePtr);
+    Pointer<Char> resultPtr = bindings.opencc_convert(textPtr.cast(), _typePtr);
     malloc.free(textPtr);
     String result = resultPtr.cast<Utf8>().toDartString();
     bindings.opencc_free_string(resultPtr);
     return result;
   }
 
-  List<String> convertList(List<String> texts, String type) {
+  List<String> convertList(List<String> texts) {
     if (texts.isEmpty) {
       return texts;
     }
     int size = texts.length;
-    Pointer<Utf8> configFilePtr = _getConfigFileFromType(type).toNativeUtf8();
     Iterable<Pointer<Utf8>> textPtrList = texts.map((e) => e.toNativeUtf8());
     Pointer<Pointer<Utf8>> textsPtr = malloc<Pointer<Utf8>>(size);
     int i = 0;
     for (Pointer<Utf8> textPtr in textPtrList) {
       textsPtr[i++] = textPtr;
     }
-    Pointer<Pointer<Char>> resultPtr = bindings.opencc_convert_list(textsPtr.cast(), size, configFilePtr.cast());
-    malloc.free(configFilePtr);
+    Pointer<Pointer<Char>> resultPtr = bindings.opencc_convert_list(textsPtr.cast(), size, _typePtr);
     textPtrList.forEach(malloc.free);
     malloc.free(textsPtr);
     List<String> result = List.generate(size, (index) => resultPtr[index].cast<Utf8>().toDartString());
     bindings.opencc_free_string_array(resultPtr, size);
     return result;
+  }
+
+  void dispose() {
+    malloc.free(_typePtr);
   }
 }

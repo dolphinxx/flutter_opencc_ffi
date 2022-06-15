@@ -18,13 +18,30 @@ class Bindings {
           lookup)
       : _lookup = lookup;
 
+  void opencc_init_converter(
+    ffi.Pointer<ffi.Char> type,
+    ffi.Pointer<ffi.Char> configFile,
+  ) {
+    return _opencc_init_converter(
+      type,
+      configFile,
+    );
+  }
+
+  late final _opencc_init_converterPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>)>>('opencc_init_converter');
+  late final _opencc_init_converter = _opencc_init_converterPtr.asFunction<
+      void Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
+
   ffi.Pointer<ffi.Char> opencc_convert(
     ffi.Pointer<ffi.Char> text,
-    ffi.Pointer<ffi.Char> configFile,
+    ffi.Pointer<ffi.Char> type,
   ) {
     return _opencc_convert(
       text,
-      configFile,
+      type,
     );
   }
 
@@ -39,12 +56,12 @@ class Bindings {
   ffi.Pointer<ffi.Pointer<ffi.Char>> opencc_convert_list(
     ffi.Pointer<ffi.Pointer<ffi.Char>> list,
     int size,
-    ffi.Pointer<ffi.Char> configFile,
+    ffi.Pointer<ffi.Char> type,
   ) {
     return _opencc_convert_list(
       list,
       size,
-      configFile,
+      type,
     );
   }
 
@@ -88,4 +105,14 @@ class Bindings {
               ffi.Int)>>('opencc_free_string_array');
   late final _opencc_free_string_array = _opencc_free_string_arrayPtr
       .asFunction<void Function(ffi.Pointer<ffi.Pointer<ffi.Char>>, int)>();
+
+  int opencc_dummy_method_to_enforce_bundling() {
+    return _opencc_dummy_method_to_enforce_bundling();
+  }
+
+  late final _opencc_dummy_method_to_enforce_bundlingPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function()>>(
+          'opencc_dummy_method_to_enforce_bundling');
+  late final _opencc_dummy_method_to_enforce_bundling =
+      _opencc_dummy_method_to_enforce_bundlingPtr.asFunction<int Function()>();
 }
