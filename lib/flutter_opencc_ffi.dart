@@ -10,7 +10,7 @@ class FlutterOpenccFfi {
   final String dataDir;
   final String type;
   late final Pointer<Char> _typePtr;
-  late final Bindings bindings;
+  static final Bindings bindings = Bindings(_getDynamicLibrary());
 
   /// [type]
   /// [dataDir] is the directory contains `.json` and `.ocd2` files.
@@ -18,14 +18,13 @@ class FlutterOpenccFfi {
     if (!Directory(dataDir).existsSync()) {
       throw AssertionError('dataDir[$dataDir] not exists');
     }
-    bindings = Bindings(_getDynamicLibrary());
     _typePtr = type.toNativeUtf8().cast();
     Pointer<Utf8> configFilePtr = _getConfigFileFromType(type).toNativeUtf8();
     bindings.opencc_init_converter(_typePtr, configFilePtr.cast());
     malloc.free(configFilePtr);
   }
 
-  DynamicLibrary _getDynamicLibrary() {
+  static DynamicLibrary _getDynamicLibrary() {
     if (Platform.isAndroid) {
       try {
         return DynamicLibrary.open('libopencc.so');
