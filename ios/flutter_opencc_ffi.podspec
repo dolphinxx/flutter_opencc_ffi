@@ -9,15 +9,18 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
 A Flutter plugin for conversion between Traditional and Simplified Chinese.
                        DESC
-  s.homepage         = 'http://example.com'
+  s.homepage         = 'https://github.com/dolphinxx/flutter_opencc_ffi'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
+  s.author           = { 'Dolphinxx' => 'bravedolphinxx@gmail.com' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
+  s.public_header_files = 'Classes/**/*.h'
+  s.source_files = 'Classes/**/*.{h,m,swift}'
   s.dependency 'Flutter'
+  s.dependency 'LibOpenCCiOS','0.0.1'
+  #s.libraries = 'c++'
   s.platform = :ios, '9.0'
 
   # Flutter.framework does not contain a i386 slice.
-  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
+  s.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO', 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
   s.swift_version = '5.0'
 end
