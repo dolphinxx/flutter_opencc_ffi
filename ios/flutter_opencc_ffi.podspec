@@ -16,7 +16,7 @@ A Flutter plugin for conversion between Traditional and Simplified Chinese.
   s.public_header_files = 'Classes/**/*.h'
   s.source_files = 'Classes/**/*.{h,m,swift}'
   s.dependency 'Flutter'
-  s.dependency 'LibOpenCCiOS','0.0.1'
+  s.dependency 'LibOpenCCiOS','0.0.2'
   #s.libraries = 'c++'
   s.platform = :ios, '9.0'
 
