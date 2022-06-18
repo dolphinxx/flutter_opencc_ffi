@@ -12,9 +12,9 @@ dependencies:
   flutter:
     sdk: flutter
   ffi: 2.0.0
-#  flutter_opencc_ffi_platform_interface: ^0.0.2
-  flutter_opencc_ffi_platform_interface:
-    path: ../flutter_opencc_ffi_platform_interface
+  flutter_opencc_ffi_platform_interface: ^0.0.2
+#  flutter_opencc_ffi_platform_interface:
+#    path: ../flutter_opencc_ffi_platform_interface
 
 dev_dependencies:
   flutter_test:
