@@ -2,7 +2,6 @@ name: flutter_opencc_ffi_platform_interface
 description: A common platform interface for the flutter_opencc_ffi plugin.
 repository: https://github.com/dolphinxx/flutter_opencc_ffi/tree/master/flutter_opencc_ffi_platform_interface
 issue_tracker: https://github.com/dolphinxx/flutter_opencc_ffi/issues
-publish_to: https://pub.dev
 version: 0.0.2
 
 environment:
