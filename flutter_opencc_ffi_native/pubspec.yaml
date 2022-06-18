@@ -1,0 +1,34 @@
+name: flutter_opencc_ffi_native
+description: FFI implementation for the flutter_opencc_ffi plugin.
+repository: https://github.com/dolphinxx/flutter_opencc_ffi/flutter_opencc_ffi_native
+issue_tracker: https://github.com/dolphinxx/flutter_opencc_ffi/issues
+version: 0.0.2
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  ffi: 2.0.0
+#  flutter_opencc_ffi_platform_interface: ^0.0.2
+  flutter_opencc_ffi_platform_interface:
+    path: ../flutter_opencc_ffi_platform_interface
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  ffigen: ^6.0.0
+  pedantic: ^1.10.0
+
+dependency_overrides:
+  # Only incompatibility is from ffigen
+  ffi: ^2.0.0
+
+ffigen:
+  output: 'lib/src/opencc.g.dart'
+  name: Bindings
+  description: Auto-generated, internal bindings to opencc
+  headers:
+    entry-points: [../opencc_library/interface.h]

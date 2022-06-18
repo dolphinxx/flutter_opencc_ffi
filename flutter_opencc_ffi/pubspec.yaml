@@ -1,0 +1,50 @@
+name: flutter_opencc_ffi
+description: A Flutter plugin for conversion between Traditional and Simplified Chinese.
+repository: https://github.com/dolphinxx/flutter_opencc_ffi
+issue_tracker: https://github.com/dolphinxx/flutter_opencc_ffi/issues
+version: 0.0.2
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+#  flutter_opencc_ffi_platform_interface: ^0.0.2
+  flutter_opencc_ffi_platform_interface:
+    path: ../flutter_opencc_ffi_platform_interface
+#  flutter_opencc_ffi_android: ^0.0.2
+  flutter_opencc_ffi_android:
+    path: ../flutter_opencc_ffi_android
+#  flutter_opencc_ffi_ios: ^0.0.2
+  flutter_opencc_ffi_ios:
+    path: ../flutter_opencc_ffi_ios
+#  flutter_opencc_ffi_macos: ^0.0.2
+  flutter_opencc_ffi_macos:
+    path: ../flutter_opencc_ffi_macos
+#  flutter_opencc_ffi_windows: ^0.0.2
+  flutter_opencc_ffi_windows:
+    path: ../flutter_opencc_ffi_windows
+#  flutter_opencc_ffi_web: ^0.0.2
+  flutter_opencc_ffi_web:
+    path: ../flutter_opencc_ffi_web
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  pedantic: ^1.10.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        default_package: flutter_opencc_ffi_android
+      ios:
+        default_package: flutter_opencc_ffi_ios
+      macos:
+        default_package: flutter_opencc_ffi_macos
+      windows:
+        default_package: flutter_opencc_ffi_windows
+      web:
+        default_package: flutter_opencc_ffi_web

@@ -2,6 +2,10 @@
 
 A Flutter plugin for conversion between Traditional and Simplified Chinese.
 
+This plugin is based on [BYVoid/OpenCC](https://github.com/BYVoid/OpenCC), and calls native methods through ffi.
+
+The web platform implementation is based on [nk2028/opencc-js](https://github.com/nk2028/opencc-js).
+
 ## Getting Started
 
 To use this plugin, you need to provide opencc data directory.
@@ -10,17 +14,23 @@ You can download them at runtime or bundle them in assets and extract to filesys
 
 See the example for how to extract data from assets.
 
-## Known issues
+For web platform, the opencc data is currently bundled to the plugin.
 
-1. `was built for newer iOS version (xx) than being linked (xx)`
+```dart
+import 'package:flutter_opencc_ffi/opencc.dart';
+// non web platform
+Converter converter = createConverter('<path to config file>');
+// eg
+Converter converter = createConverter('<some dir>/opencc/s2tw.json');
+// web platform
+Converter converter = createConverter('<type>');
+// eg:
+Converter converter = createConverter('s2tw');
 
-Add `-w` to Target > Build Settings > Other Linker Flags
+String result = converter.convert('着装污染虚伪发泄棱柱群众里面');
+// result: 著裝汙染虛偽發洩稜柱群眾裡面
+List<String> result = converter.convertList(['着装污染虚伪发泄棱柱群众里面', '鲶鱼和鲇鱼是一种生物。']);
+// result: ['著裝汙染虛偽發洩稜柱群眾裡面', '鯰魚和鯰魚是一種生物。']
 
-2. `The 'Pods-Runner' target has transitive dependencies that include statically linked binaries: (/**/ios/Pods/LibOpenCCiOS/libopencc.a)`
-
-Comment out `use_frameworks!` in Podfile, that is
-
-```
-- use_frameworks!
-+ #use_frameworks!
+converter.dispose();
 ```

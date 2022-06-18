@@ -1,0 +1,29 @@
+name: flutter_opencc_ffi_macos
+description: MacOS platform implementation of flutter_opencc_ffi
+repository: https://github.com/dolphinxx/flutter_opencc_ffi/tree/master/flutter_opencc_ffi_macos
+issue_tracker: https://github.com/dolphinxx/flutter_opencc_ffi/issues
+version: 0.0.2
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.0.0"
+
+flutter:
+  plugin:
+    implements: flutter_opencc_ffi
+    platforms:
+      macos:
+        pluginClass: FlutterOpenccFfiPlugin
+
+dependencies:
+  flutter:
+    sdk: flutter
+  #  flutter_opencc_ffi_platform_interface: ^0.0.2
+  flutter_opencc_ffi_platform_interface:
+    path: ../flutter_opencc_ffi_platform_interface
+  #  flutter_opencc_ffi_native: ^0.0.2
+  flutter_opencc_ffi_native:
+    path: ../flutter_opencc_ffi_native
+
+dev_dependencies:
+  pedantic: ^1.10.0
