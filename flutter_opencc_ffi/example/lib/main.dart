@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_opencc_ffi/opencc.dart';
+import 'package:flutter_opencc_ffi/flutter_opencc_ffi.dart';
 import 'package:flutter_opencc_ffi_example/utils.dart';
 
 void main() {

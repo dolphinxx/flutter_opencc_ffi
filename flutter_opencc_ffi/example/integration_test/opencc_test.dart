@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle, ByteData;
-import 'package:flutter_opencc_ffi/opencc.dart';
+import 'package:flutter_opencc_ffi/flutter_opencc_ffi.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:path_provider/path_provider.dart' show getApplicationSupportDirectory;
