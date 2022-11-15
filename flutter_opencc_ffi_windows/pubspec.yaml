@@ -2,7 +2,7 @@ name: flutter_opencc_ffi_windows
 description: Windows platform implementation of flutter_opencc_ffi
 repository: https://github.com/dolphinxx/flutter_opencc_ffi/tree/master/flutter_opencc_ffi_windows
 issue_tracker: https://github.com/dolphinxx/flutter_opencc_ffi/issues
-version: 0.0.2
+version: 0.0.3
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -18,9 +18,9 @@ flutter:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_opencc_ffi_platform_interface: ^0.0.2
+  flutter_opencc_ffi_platform_interface: ^0.0.3
 #  flutter_opencc_ffi_platform_interface:
 #    path: ../flutter_opencc_ffi_platform_interface
-  flutter_opencc_ffi_native: ^0.0.2
+  flutter_opencc_ffi_native: ^0.0.3
 #  flutter_opencc_ffi_native:
 #    path: ../flutter_opencc_ffi_native

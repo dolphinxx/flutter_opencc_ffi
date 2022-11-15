@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'flutter_opencc_ffi_ios'
-  s.version          = '0.0.2'
+  s.version          = '0.0.3'
   s.summary          = 'A Flutter plugin for conversion between Traditional and Simplified Chinese.'
   s.description      = <<-DESC
 A Flutter plugin for conversion between Traditional and Simplified Chinese.
@@ -16,7 +16,7 @@ A Flutter plugin for conversion between Traditional and Simplified Chinese.
   s.public_header_files = 'Classes/**/*.h'
   s.source_files = 'Classes/**/*.{h,m,swift}'
   s.dependency 'Flutter'
-  s.dependency 'LibOpenCCiOS','0.0.2'
+  s.dependency 'LibOpenCCiOS','0.0.3'
   #s.libraries = 'c++'
   s.platform = :ios, '9.0'
 

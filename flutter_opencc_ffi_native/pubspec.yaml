@@ -2,7 +2,7 @@ name: flutter_opencc_ffi_native
 description: FFI implementation for the flutter_opencc_ffi plugin.
 repository: https://github.com/dolphinxx/flutter_opencc_ffi/flutter_opencc_ffi_native
 issue_tracker: https://github.com/dolphinxx/flutter_opencc_ffi/issues
-version: 0.0.2
+version: 0.0.3
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   ffi: ^2.0.1
-  flutter_opencc_ffi_platform_interface: ^0.0.2
+  flutter_opencc_ffi_platform_interface: ^0.0.3
 #  flutter_opencc_ffi_platform_interface:
 #    path: ../flutter_opencc_ffi_platform_interface
 

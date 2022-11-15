@@ -1,5 +1,5 @@
 group 'com.whaleread.flutter_opencc_ffi.flutter_opencc_ffi'
-version '0.0.2'
+version '0.0.3'
 
 buildscript {
     ext.kotlin_version = '1.6.10'
@@ -48,5 +48,5 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.github.dolphinxx:opencc_android:0.0.2'
+    implementation 'com.github.dolphinxx:opencc_android:0.0.3'
 }
