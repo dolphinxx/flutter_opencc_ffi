@@ -7,7 +7,7 @@ import 'package:flutter_opencc_ffi_native/src/opencc.g.dart';
 import 'package:flutter_opencc_ffi_platform_interface/converter.dart';
 
 class ConverterFfi extends Converter {
-  late final Pointer<Char> _typePtr;
+  late final int _convertId;
   static final Bindings bindings = Bindings(_getDynamicLibrary());
 
   /// [configFile] should end with `$type.json`.
@@ -15,9 +15,8 @@ class ConverterFfi extends Converter {
     if (!File(configFile).existsSync()) {
       throw ArgumentError('configFile[$configFile] not exists');
     }
-    _typePtr = type.toNativeUtf8().cast();
     Pointer<Utf8> configFilePtr = configFile.toNativeUtf8();
-    bindings.opencc_init_converter(_typePtr, configFilePtr.cast());
+    _convertId = bindings.opencc_init_converter(configFilePtr.cast());
     malloc.free(configFilePtr);
   }
 
@@ -57,7 +56,7 @@ class ConverterFfi extends Converter {
       return text;
     }
     Pointer<Utf8> textPtr = text.toNativeUtf8();
-    Pointer<Char> resultPtr = bindings.opencc_convert(textPtr.cast(), _typePtr);
+    Pointer<Char> resultPtr = bindings.opencc_convert(textPtr.cast(), _convertId);
     malloc.free(textPtr);
     String result = resultPtr.cast<Utf8>().toDartString();
     bindings.opencc_free_string(resultPtr);
@@ -76,7 +75,7 @@ class ConverterFfi extends Converter {
     for (Pointer<Utf8> textPtr in textPtrList) {
       textsPtr[i++] = textPtr;
     }
-    Pointer<Pointer<Char>> resultPtr = bindings.opencc_convert_list(textsPtr.cast(), size, _typePtr);
+    Pointer<Pointer<Char>> resultPtr = bindings.opencc_convert_list(textsPtr.cast(), size, _convertId);
     textPtrList.forEach(malloc.free);
     malloc.free(textsPtr);
     List<String> result = List.generate(size, (index) => resultPtr[index].cast<Utf8>().toDartString());
@@ -86,6 +85,6 @@ class ConverterFfi extends Converter {
 
   @override
   void dispose() {
-    malloc.free(_typePtr);
+    bindings.opencc_delete_converter(_convertId);
   }
 }

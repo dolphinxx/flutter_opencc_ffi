@@ -1,48 +1,49 @@
 #include <cstring>
 #include <map>
-#include <cstdlib>
 #include "OpenCC/src/Converter.hpp"
 #include "OpenCC/src/Config.hpp"
 
-struct cmpByString {
-  bool operator()(const char* a, const char* b) const {
-    return strcmp(a, b) < 0;
-  }
-};
-
-static std::map<const char*, opencc::ConverterPtr, cmpByString> converters;
+static std::map<int, opencc::ConverterPtr> converters;
+static int idIncrement = 0;
 
 extern "C"
 {
-  void opencc_init_converter(const char* type, const char* configFile) {
+  int opencc_init_converter(const char* configFile) {
     opencc::Config config;
     opencc::ConverterPtr converter = config.NewFromFile(configFile);
-    char* t = strcpy(new char[strlen(type)], type);
-    converters[t] = converter;
+    int id = idIncrement++;
+    converters[id] = converter;
+    return id;
   }
 
-  char* opencc_convert(const char* text, const char* type) {
-    opencc::ConverterPtr converter = converters[type];
+  void opencc_delete_converter(int id) { 
+    std::map<int, opencc::ConverterPtr>::iterator it = converters.find(id);
+    if (it != converters.end())
+      converters.erase(it);
+  }
+
+  char* opencc_convert(const char* text, int id) {
+    opencc::ConverterPtr converter = converters[id];
     if(converter == nullptr) {
       return nullptr;
     }
 
     std::string s = converter->Convert(text);
 
-    char* r = strcpy(new char[s.length()], s.c_str());
+    char* r = strcpy(new char[s.length() + 1], s.c_str());
 
     return r;
   }
 
-  char** opencc_convert_list(char** list, int size, const char* type) {
-    opencc::ConverterPtr converter = converters[type];
+  char** opencc_convert_list(char** list, int size, int id) {
+    opencc::ConverterPtr converter = converters[id];
     if(converter == nullptr) {
       return nullptr;
     }
     char** result = (char**)malloc(size * sizeof(char*));
     for(int i = 0;i < size;i++) {
       std::string s = converter->Convert((char*)list[i]);
-      result[i] = (char*) malloc(s.length());
+      result[i] = new char[s.length() + 1];
       strcpy(result[i], s.c_str());
     }
     return result;

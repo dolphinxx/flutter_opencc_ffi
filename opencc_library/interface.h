@@ -1,8 +1,10 @@
-void opencc_init_converter(const char* type, const char* configFile);
+int opencc_init_converter(const char* configFile);
 
-char* opencc_convert(const char* text, const char* type);
+void opencc_delete_converter(int id);
 
-char** opencc_convert_list(char** list, int size, const char* type);
+char* opencc_convert(const char* text, int id);
+
+char** opencc_convert_list(char** list, int size, int id);
 
 void opencc_free_string(char *str);
 

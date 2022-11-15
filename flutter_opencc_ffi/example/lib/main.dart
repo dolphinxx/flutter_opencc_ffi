@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_opencc_ffi/flutter_opencc_ffi.dart';
+import 'package:flutter_opencc_ffi_example/pressure.dart';
 import 'package:flutter_opencc_ffi_example/utils.dart';
 
 void main() {
@@ -31,6 +32,7 @@ class _MyAppState extends State<MyApp> {
   String result = '';
   String error = '';
   String type = '';
+  bool runningPressureTest = false;
 
   @override
   void initState() {
@@ -121,6 +123,23 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('開放中文轉換 (Open Chinese Convert)'),
+          actions: [
+            ElevatedButton(
+              onPressed: runningPressureTest ? null : () {
+                setState(() {
+                  runningPressureTest = true;
+                });
+                runPressureForConvertString().whenComplete(() {
+                  if(mounted) {
+                    setState(() {
+                      runningPressureTest = false;
+                    });
+                  }
+                });
+              },
+                child: runningPressureTest ? const CircularProgressIndicator() : const Text('Pressure'),
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(6),

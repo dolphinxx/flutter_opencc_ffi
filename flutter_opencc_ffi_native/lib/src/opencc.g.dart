@@ -18,50 +18,60 @@ class Bindings {
           lookup)
       : _lookup = lookup;
 
-  void opencc_init_converter(
-    ffi.Pointer<ffi.Char> type,
+  int opencc_init_converter(
     ffi.Pointer<ffi.Char> configFile,
   ) {
     return _opencc_init_converter(
-      type,
       configFile,
     );
   }
 
-  late final _opencc_init_converterPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>)>>('opencc_init_converter');
-  late final _opencc_init_converter = _opencc_init_converterPtr.asFunction<
-      void Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
+  late final _opencc_init_converterPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>)>>(
+          'opencc_init_converter');
+  late final _opencc_init_converter = _opencc_init_converterPtr
+      .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
+
+  void opencc_delete_converter(
+    int id,
+  ) {
+    return _opencc_delete_converter(
+      id,
+    );
+  }
+
+  late final _opencc_delete_converterPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int)>>(
+          'opencc_delete_converter');
+  late final _opencc_delete_converter =
+      _opencc_delete_converterPtr.asFunction<void Function(int)>();
 
   ffi.Pointer<ffi.Char> opencc_convert(
     ffi.Pointer<ffi.Char> text,
-    ffi.Pointer<ffi.Char> type,
+    int id,
   ) {
     return _opencc_convert(
       text,
-      type,
+      id,
     );
   }
 
   late final _opencc_convertPtr = _lookup<
       ffi.NativeFunction<
           ffi.Pointer<ffi.Char> Function(
-              ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>>('opencc_convert');
-  late final _opencc_convert = _opencc_convertPtr.asFunction<
-      ffi.Pointer<ffi.Char> Function(
-          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
+              ffi.Pointer<ffi.Char>, ffi.Int)>>('opencc_convert');
+  late final _opencc_convert = _opencc_convertPtr
+      .asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, int)>();
 
   ffi.Pointer<ffi.Pointer<ffi.Char>> opencc_convert_list(
     ffi.Pointer<ffi.Pointer<ffi.Char>> list,
     int size,
-    ffi.Pointer<ffi.Char> type,
+    int id,
   ) {
     return _opencc_convert_list(
       list,
       size,
-      type,
+      id,
     );
   }
 
@@ -70,10 +80,10 @@ class Bindings {
           ffi.Pointer<ffi.Pointer<ffi.Char>> Function(
               ffi.Pointer<ffi.Pointer<ffi.Char>>,
               ffi.Int,
-              ffi.Pointer<ffi.Char>)>>('opencc_convert_list');
+              ffi.Int)>>('opencc_convert_list');
   late final _opencc_convert_list = _opencc_convert_listPtr.asFunction<
       ffi.Pointer<ffi.Pointer<ffi.Char>> Function(
-          ffi.Pointer<ffi.Pointer<ffi.Char>>, int, ffi.Pointer<ffi.Char>)>();
+          ffi.Pointer<ffi.Pointer<ffi.Char>>, int, int)>();
 
   void opencc_free_string(
     ffi.Pointer<ffi.Char> str,
