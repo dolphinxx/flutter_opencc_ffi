@@ -25,6 +25,3 @@ dependencies:
   flutter_opencc_ffi_native: ^0.0.2
 #  flutter_opencc_ffi_native:
 #    path: ../flutter_opencc_ffi_native
-
-dev_dependencies:
-  pedantic: ^1.10.0

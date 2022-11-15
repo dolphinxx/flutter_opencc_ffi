@@ -7,7 +7,7 @@ packages:
       name: characters
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.2.0"
+    version: "1.2.1"
   collection:
     dependency: transitive
     description:
@@ -30,16 +30,16 @@ packages:
   flutter_opencc_ffi_native:
     dependency: "direct main"
     description:
-      path: "../flutter_opencc_ffi_native"
-      relative: true
-    source: path
+      name: flutter_opencc_ffi_native
+      url: "https://pub.flutter-io.cn"
+    source: hosted
     version: "0.0.2"
   flutter_opencc_ffi_platform_interface:
     dependency: "direct main"
     description:
-      path: "../flutter_opencc_ffi_platform_interface"
-      relative: true
-    source: path
+      name: flutter_opencc_ffi_platform_interface
+      url: "https://pub.flutter-io.cn"
+    source: hosted
     version: "0.0.2"
   material_color_utilities:
     dependency: transitive
@@ -47,21 +47,14 @@ packages:
       name: material_color_utilities
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.1.4"
+    version: "0.1.5"
   meta:
     dependency: transitive
     description:
       name: meta
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.7.0"
-  pedantic:
-    dependency: "direct dev"
-    description:
-      name: pedantic
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.11.1"
+    version: "1.8.0"
   plugin_platform_interface:
     dependency: transitive
     description:
