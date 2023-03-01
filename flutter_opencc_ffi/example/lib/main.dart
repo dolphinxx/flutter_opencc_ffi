@@ -129,7 +129,7 @@ class _MyAppState extends State<MyApp> {
                 setState(() {
                   runningPressureTest = true;
                 });
-                runPressureForConvertString().whenComplete(() {
+                runPressureForConvertList().whenComplete(() {
                   if(mounted) {
                     setState(() {
                       runningPressureTest = false;
