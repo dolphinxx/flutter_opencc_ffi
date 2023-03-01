@@ -1,8 +1,7 @@
 import 'dart:js' as js;
-import 'dart:html' as html;
 import 'package:flutter_opencc_ffi_platform_interface/converter.dart';
 import 'package:flutter_opencc_ffi_web/src/trie.dart';
-import 'package:flutter_opencc_ffi_web/src/html.dart';
+import 'package:flutter_opencc_ffi_web/src/init_js.dart';
 const dictConfigs = {
   'hk2s': [["HKVariantsRevPhrases","HKVariantsRev","TSPhrases","TSCharacters"], ["HKRev", "TS"]],
   'hk2t': [["HKVariantsRevPhrases","HKVariantsRev"], ["HKRev"]],
@@ -22,20 +21,7 @@ const dictConfigs = {
 class ConverterWeb extends Converter {
 
   ConverterWeb(String configFile):super(configFile) {
-    // TODO: remove these lines when opencc-js uses window or globalThis to define `OpenCCJSData`, see init_js.dart
-    final dictConfig = dictConfigs[type];
-    if(dictConfig == null) {
-      throw ArgumentError('type[$type] not supported.');
-    }
-    html.Element body = html.querySelector('body')!;
-    for(String dictFile in dictConfig[1]) {
-      final id = '#OPENCC_DICT_$dictFile';
-      if(html.querySelector(id) == null) {
-        html.ScriptElement script = createScriptTag('./assets/packages/flutter_opencc_ffi_web/assets/opencc/$dictFile.js');
-        script.id = id;
-        body.append(script);
-      }
-    }
+    initPlatform();
   }
 
   String _getDict(dictName) {
